@@ -6,7 +6,7 @@ from helper import Helper
 
 help = Helper()
 
-raw = "../../data/raw" 
+raw = "/home/said/categ/data/raw" 
 directories = os.listdir(raw)
 
 for directory in directories:
