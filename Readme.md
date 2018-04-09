@@ -16,7 +16,13 @@ Based on
     ```text
     sudo pip install -U nltk
     ```
-  
+
+* Make sure you have [FARASA](http://qatsdemo.cloudapp.net/farasa/demo.html)
+    ```text
+    You can try it online and/or download it from: http://farasa.qcri.org.
+    ```
+
+
 ## Project layout 
 
 ```text
