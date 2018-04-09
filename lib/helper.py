@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 
-import os, nltk, pickle
+import os, pickle
 from string import punctuation
+# import nltk
 
-farasa = "../Tools/farasa"
+tools = '/media/said/DevStuff/PFE/ArabicTextCategorization/Tools/'
+farasa = tools+'farasa'
+farasaSegmenter = farasa + '/segmenter'
 
 class Helper():
     def __init__(self, article = False):
@@ -26,28 +29,32 @@ class Helper():
 
 
     def getLemmaArticle(self, content):
-        farasaSegmenter = os.path.join(farasa, 'segmenter/FarasaSegmenterJar.jar')
-        os.system('echo "' + content + '" > tmp | java -jar ' + farasaSegmenter + ' -l true -i tmp -o tmpLemma')
-        return self.getArticleContent('tmpLemma')
+        jarFarasaSegmenter = os.path.join(farasaSegmenter, 'FarasaSegmenterJar.jar')
+        tmp = os.path.join(farasaSegmenter, 'tmp')
+        tmpLemma = os.path.join(farasaSegmenter, 'tmpLemma')
+        os.system('echo "' + content + '" > ' + tmp + ' | java -jar ' + jarFarasaSegmenter + ' -l true -i ' + tmp + ' -o ' + tmpLemma)
+        return self.getArticleContent(tmpLemma)
 
 
     def getCleanArticle(self, content):
         content = ''.join(c for c in content if c not in punctuation)
-        words = nltk.word_tokenize(content)     
-        stopWords = open("../Tools/arabic-stop-words/list.txt").read().splitlines()
+        # words = nltk.word_tokenize(content)   
+        words = content.split()     
+        stopWords = open(os.path.join(tools, "arabic-stop-words/list.txt")).read().splitlines()
         cleandWords = [w for w in words if w not in stopWords]
         return cleandWords
 
 
-    def getBagWordsArticle(self):
-        content = self.getArticleContent(self.article)
+    def getBagWordsArticle(self, article):
+        content = self.getArticleContent(article)
         lemmaContent = self.getLemmaArticle(content)
         cleanArticle = self.getCleanArticle(lemmaContent)
-        print(cleanArticle)
-        return
+        return cleanArticle
 
     def main(self):
-        self.getBagWordsArticle()
+        content = self.getArticleContent(self.article)
+        lemma = self.getLemmaArticle(content)
+        print(lemma)
 
 
 # if __name__ == '__main__':
