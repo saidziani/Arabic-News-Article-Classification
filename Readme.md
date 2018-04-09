@@ -50,7 +50,7 @@ Based on
 
 * Symlink to your Raw data
     ```text
-        user@host:~$ ln -s /path/to/your/raw/data . 
+        user@host:/my/awesome/project$ ln -s /path/to/your/raw/data . 
     ```
 
 * Data location must follow this structure:
