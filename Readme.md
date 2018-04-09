@@ -1,8 +1,10 @@
 # Arabic Text Categorization
 
-Based on  
-TALLA PAPER
-
+Based on 
+    ```text 
+    Building TALAA, a Free General and Categorized Arabic Corpus
+    http://www.scitepress.org/DigitalLibrary/PublicationsDetail.aspx?ID=I6xZZqEr61o=&t=1
+    ``` 
 
 ## Starting Project
 
