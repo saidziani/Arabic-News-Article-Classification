@@ -2,12 +2,17 @@
 
 import os, pickle
 from string import punctuation
+punctuation += '،؟؛'
 # import nltk
 
-tools = '/media/said/DevStuff/PFE/ArabicTextCategorization/Tools/'
+
+root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
+tools = root+'Tools/'
 farasa = tools+'farasa'
 farasaSegmenter = farasa + '/segmenter'
 
+stopWords = open(os.path.join(tools, "arabic-stop-words/list.txt")).read().splitlines()
+stopWords.append('الخبر')
 class Helper():
     def __init__(self, article = False):
         self.article = article
@@ -40,16 +45,16 @@ class Helper():
         content = ''.join(c for c in content if c not in punctuation)
         # words = nltk.word_tokenize(content)   
         words = content.split()     
-        stopWords = open(os.path.join(tools, "arabic-stop-words/list.txt")).read().splitlines()
         cleandWords = [w for w in words if w not in stopWords]
-        return cleandWords
+        return ' '.join(cleandWords)
 
 
     def getBagWordsArticle(self, article):
         content = self.getArticleContent(article)
-        lemmaContent = self.getLemmaArticle(content)
+        cleanArticle = self.getCleanArticle(content)
+        lemmaContent = self.getLemmaArticle(cleanArticle)
         cleanArticle = self.getCleanArticle(lemmaContent)
-        return cleanArticle
+        return cleanArticle.split()
 
     def main(self):
         content = self.getArticleContent(self.article)
@@ -57,6 +62,8 @@ class Helper():
         print(lemma)
 
 
-# if __name__ == '__main__':
-#     help = Helper('article1.txt')
-#     help.main()
+if __name__ == '__main__':
+    file = 'RL.pkl'
+    help = Helper('article1.txt')
+    print(help.getPickleContent(file))
+
