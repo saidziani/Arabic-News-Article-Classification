@@ -6,7 +6,7 @@ punctuation += '،؟؛'
 # import nltk
 
 
-root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
+root = '/home/said/categ/ArabicTextCategorization/'
 tools = root+'Tools/'
 farasa = tools+'farasa'
 farasaSegmenter = farasa + '/segmenter'
