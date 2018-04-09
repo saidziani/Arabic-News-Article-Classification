@@ -11,7 +11,7 @@ tools = root+'Tools/'
 farasa = tools+'farasa'
 farasaSegmenter = farasa + '/segmenter'
 
-stopWords = open(os.path.join(tools, "arabic-stop-words/list.txt")).read().splitlines()
+stopWords = open(os.path.join(tools, "arabic-stop-words/list.txt"), 'r', encoding='utf-8').read().splitlines()
 stopWords.append('الخبر')
 class Helper():
     def __init__(self, article = False):
@@ -30,14 +30,16 @@ class Helper():
 
     def getArticleContent(self, article):
         if os.path.exists(article):
-            return open(article, 'r').read() 
+            return open(article, 'r', encoding='utf-8').read() 
 
 
     def getLemmaArticle(self, content):
         jarFarasaSegmenter = os.path.join(farasaSegmenter, 'FarasaSegmenterJar.jar')
         tmp = os.path.join(farasaSegmenter, 'tmp')
         tmpLemma = os.path.join(farasaSegmenter, 'tmpLemma')
-        os.system('echo "' + content + '" > ' + tmp + ' | java -jar ' + jarFarasaSegmenter + ' -l true -i ' + tmp + ' -o ' + tmpLemma)
+        with open(tmp, 'w', encoding='utf-8') as output:
+            output.write(content)
+        os.system('java -jar ' + jarFarasaSegmenter + ' -l true -i ' + tmp + ' -o ' + tmpLemma)
         return self.getArticleContent(tmpLemma)
 
 
