@@ -1,21 +1,20 @@
 # Arabic Text Categorization
 
 Based on 
-    ```text 
-    Building TALAA, a Free General and Categorized Arabic Corpus
-    http://www.scitepress.org/DigitalLibrary/PublicationsDetail.aspx?ID=I6xZZqEr61o=&t=1
-    ``` 
+ 
+### [Building TALAA, a Free General and Categorized Arabic Corpus](http://www.scitepress.org/DigitalLibrary/PublicationsDetail.aspx?ID=I6xZZqEr61o=&t=1)
+
 
 ## Starting Project
 
 * Make sure you have installed pip (Python 3)
     ```text
-    How to install pip
+    sudo apt-get install python3-pip
     ```
 
 * Make sure you have NLTK (Natural Language Tool Kit) installed  (Python 3)
     ```text
-    pip install nltk
+    sudo pip install -U nltk
     ```
   
 ## Project layout 
