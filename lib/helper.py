@@ -3,10 +3,11 @@
 import os, pickle
 from string import punctuation
 punctuation += '،؟؛'
+
 # import nltk
 
 
-# root = '/home/said/categ/ArabicTextCategorization/'
+root = '/home/said/categ/ArabicTextCategorization/'
 root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
 tools = root+'Tools/'
 farasa = tools+'farasa'
@@ -14,6 +15,7 @@ farasaSegmenter = farasa + '/segmenter'
 
 stopWords = open(os.path.join(tools, "arabic-stop-words/list.txt"), 'r', encoding='utf-8').read().splitlines()
 stopWords.append('الخبر')
+
 class Helper():
     def __init__(self, article = False):
         self.article = article
@@ -31,8 +33,10 @@ class Helper():
 
     def getArticleContent(self, article):
         if os.path.exists(article):
-            return open(article, 'r', encoding='utf-8').read() 
-
+            try:
+                return open(article, 'r', encoding='utf-8').read()
+            except:
+                pass
 
     def getLemmaArticle(self, content):
         jarFarasaSegmenter = os.path.join(farasaSegmenter, 'FarasaSegmenterJar.jar')
@@ -54,10 +58,13 @@ class Helper():
 
     def getBagWordsArticle(self, article):
         content = self.getArticleContent(article)
-        cleanArticle = self.getCleanArticle(content)
-        lemmaContent = self.getLemmaArticle(cleanArticle)
-        cleanArticle = self.getCleanArticle(lemmaContent)
-        return cleanArticle.split()
+        if content:
+            cleanArticle = self.getCleanArticle(content)
+            lemmaContent = self.getLemmaArticle(cleanArticle)
+            cleanArticle = self.getCleanArticle(lemmaContent)
+            return cleanArticle.split()
+        else:
+            return []
 
     def main(self):
         content = self.getArticleContent(self.article)
@@ -67,6 +74,3 @@ class Helper():
 
 if __name__ == '__main__':
     file = 'RL.pkl'
-    help = Helper('article1.txt')
-    print(help.getPickleContent(file))
-
