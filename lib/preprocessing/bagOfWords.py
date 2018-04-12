@@ -9,9 +9,9 @@ help = Helper()
 
 raw = "/home/said/categ/data/raw" 
 temp = "/home/said/categ/data/temp" 
-root = "/media/said/DevStuff/PFE/ArabicTextCategorization/"
-# root = "/home/said/categ/"
-raw = root+'data/temp'
+# root = "/media/said/DevStuff/PFE/ArabicTextCategorization/"
+root = "/home/said/categ/"
+raw = root+'data/raw'
 temp = root+'data/temp'
 prep = root+'data/preprocessed'
 

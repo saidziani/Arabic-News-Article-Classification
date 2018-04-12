@@ -8,7 +8,7 @@ punctuation += '،؟؛'
 
 
 root = '/home/said/categ/ArabicTextCategorization/'
-root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
+# root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
 tools = root+'Tools/'
 farasa = tools+'farasa'
 farasaSegmenter = farasa + '/segmenter'
@@ -58,6 +58,8 @@ class Helper():
 
     def getBagWordsArticle(self, article):
         content = self.getArticleContent(article)
+        print(content)
+        exit(-1)
         if content:
             cleanArticle = self.getCleanArticle(content)
             lemmaContent = self.getLemmaArticle(cleanArticle)
