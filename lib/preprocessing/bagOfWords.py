@@ -6,22 +6,24 @@ from helper import Helper
 
 help = Helper()
 
+
 raw = "/home/said/categ/data/raw" 
+temp = "/home/said/categ/data/temp" 
+
 directories = os.listdir(raw)
 
-for directory in directories[:1]:
+for directory in directories:
     directoryPath = os.path.join(raw, directory)
     files = os.listdir(directoryPath)
     dic = {}
-    i = 0
-    for file in files:
+    for i in range(1, len(files)+1):
+        file = str(i)
         filePath = os.path.join(directoryPath, file)
         bgw = help.getBagWordsArticle(filePath)
         dic[file] = bgw
-        i = files.index(file) + 1
         print(i)
         w = i % 100
         if w == 0 : 
-            help.setPickleContent(directoryPath+'/'+directory+str(i), dic)
+            help.setPickleContent(temp+'/'+directory+'/'+str(i), dic)
             print('OK', i)
 
