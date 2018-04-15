@@ -5,8 +5,11 @@ from string import punctuation
 punctuation += '،؟؛'
 # import nltk
 
-
+#Local
 root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
+#Server
+# root = '/home/said/categ/ArabicTextCategorization/'
+
 tools = root+'Tools/'
 farasa = tools+'farasa'
 farasaSegmenter = farasa + '/segmenter'
