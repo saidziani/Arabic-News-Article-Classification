@@ -14,22 +14,25 @@ raw = root+'data/raw'
 temp = root+'data/temp'
 prep = root+'data/preprocessed'
 
+raw = 'data/'
+temp = 'temp/'
+tempNL = temp+'NL'
 
-directories = os.listdir(raw)
+# directories = os.listdir(raw)
+directories = ['SP', 'CL', 'PO', 'SO', 'RL']
+separator, content = '\nفففففففففففففففففففف\n', ''
 
 for directory in directories[2:3]:
     directoryPath = os.path.join(raw, directory)
     files = os.listdir(directoryPath)
-    dic = {}
     for i in range(1, len(files)+1):
         file = str(i)
         filePath = os.path.join(directoryPath, file)
-        
-        bgw = help.getBagWordsArticle(filePath)
-        if bgw != [] :
-            dic[file] = bgw
-            print("Inside:", filePath)
-            w = i % 50
-            if w == 0 :
-                help.setPickleContent(prep+'/'+directory+'/'+str(i), dic)
-                print('OK-- ', directory, i)
+        content += help.dropNline(filePath) + separator
+        w = i % 5
+        if w == 0 :
+            newFile = tempNL+'/'+directory+'/'+str(i)
+            newFile = open(newFile, 'w')
+            newFile.write(content)
+            content = ''
+            print('OK-- ', directory, i)
