@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import os, pickle
+import os, pickle, re
 from string import punctuation
 punctuation += '،؟؛'
 # import nltk
@@ -33,8 +33,12 @@ class Helper():
 
     def getArticleContent(self, article):
         if os.path.exists(article):
-            return open(article, 'r').read() 
+            return open(article, 'r').read()
 
+    def dropNline(self, article):
+        if os.path.exists(article):
+            content = self.getArticleContent(article)
+            return re.sub(r'\n', ' ', content)
 
     def getLemmaArticle(self, content):
         jarFarasaSegmenter = os.path.join(farasaSegmenter, 'FarasaSegmenterJar.jar')
