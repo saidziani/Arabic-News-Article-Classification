@@ -7,21 +7,16 @@ from helper import Helper
 help = Helper()
 
 root = "/home/said/categ/"
-prep = root+'data/preprocessed/'
+ready = root+'data/ready/'
+vocabularies = root+'data/vocabularies/'
 
-directories = ['PO', 'CL', 'RL', 'SO', 'SP']
-
-index = 2
-
-category = prep+directories[index]
-
-files = os.listdir(category)
-
-categBGW = []
+files = os.listdir(ready)
 
 for file in files:
-    items = help.getPickleContent(file)
-    categBGW.extend(items)
-
-target = category+'/global'
-help.setPickleContent(target, categBGW)
+    vocabulary = []
+    filePath = ready+file
+    print(filePath)
+    articles = help.getPickleContent(filePath)
+    [vocabulary.extend(list(set(article))) for article in articles]
+    output = vocabularies+''.join(file.split('.')[:-1])+'_vocabulary'
+    help.setPickleContent(output, vocabulary)

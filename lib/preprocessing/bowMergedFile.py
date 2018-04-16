@@ -26,8 +26,8 @@ target = prep+directories[-1]
 files = os.listdir(directory)
 
 for file in files:
-    outputPath = target+'/'+file
     inputPath = directory+'/'+file
     bgw = help.getBagWordsArticle(inputPath)
     bagofwords = [article.split() for article in ' '.join(bgw).split('فففففففففففففففففففف')]
+    outputPath = target+'/'+file
     help.setPickleContent(outputPath, bagofwords)
