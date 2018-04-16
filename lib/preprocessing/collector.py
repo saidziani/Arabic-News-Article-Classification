@@ -1,30 +1,27 @@
 #!/usr/bin/python3
 
-import sys
+import sys, os
 sys.path.insert(0, '../')
 from helper import Helper
 
 help = Helper()
 
 root = "/home/said/categ/"
+prep = root+'data/preprocessed/'
 
-temp = root+'data/temp'
-prep = root+'data/preprocessed'
+directories = ['PO', 'CL', 'RL', 'SO', 'SP']
 
-directories = ['RL', 'PO', 'CL', 'SP', 'SO'] 
-directory = directories[0]
-filePkl = prep+'/'+directory+'/2500.pkl'
+index = 2
 
-filePkl = 'prep/RL.pkl'
+category = prep+directories[index]
 
-articles = help.getPickleContent(filePkl)
+files = os.listdir(category)
 
-print(len(articles))
-# content = []
-# for article in articles.items():
-#     content.extend(article[1])
-#     content = list(set(content))
+categBGW = []
 
-# fileName = temp+'/'+directory+'/'+directory
-# help.setPickleContent(fileName, content)
-# print(len(content))
+for file in files:
+    items = help.getPickleContent(file)
+    categBGW.extend(items)
+
+target = category+'/global'
+help.setPickleContent(target, categBGW)

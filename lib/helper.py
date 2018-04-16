@@ -6,9 +6,9 @@ punctuation += '،؟؛'
 # import nltk
 
 #Local
-root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
+# root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
 #Server
-# root = '/home/said/categ/ArabicTextCategorization/'
+root = '/home/said/categ/ArabicTextCategorization/'
 
 tools = root+'Tools/'
 farasa = tools+'farasa'
@@ -70,7 +70,7 @@ class Helper():
 
 
 if __name__ == '__main__':
-    file = 'RL.pkl'
+    file = '~/categ/data/preprocessed/PO/global.pkl'
     help = Helper('article1.txt')
-    print(help.getPickleContent(file))
+    print(len(help.getPickleContent(file)))
 
