@@ -6,9 +6,9 @@ punctuation += '،؟؛'
 # import nltk
 
 #Local
-# root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
+root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
 #Server
-root = '/home/said/categ/ArabicTextCategorization/'
+# root = '/home/said/categ/ArabicTextCategorization/'
 
 tools = root+'Tools/'
 farasa = tools+'farasa'
@@ -42,9 +42,19 @@ class Helper():
 
     def getLemmaArticle(self, content):
         jarFarasaSegmenter = os.path.join(farasaSegmenter, 'FarasaSegmenterJar.jar')
+
         tmp = os.path.join(farasaSegmenter, 'tmp')
+        if os.path.exists(tmp):
+            os.system('rm '+tmp)
+        open(tmp, 'w').write(content)
+
         tmpLemma = os.path.join(farasaSegmenter, 'tmpLemma')
-        os.system('echo "' + content + '" > ' + tmp + ' | java -jar ' + jarFarasaSegmenter + ' -l true -i ' + tmp + ' -o ' + tmpLemma)
+        if os.path.exists(tmpLemma):
+            os.system('rm '+tmpLemma)
+
+        os.system('java -jar ' + jarFarasaSegmenter + ' -l true -i ' + tmp + ' -o ' + tmpLemma)
+
+        # os.system('echo "' + content + '" > ' + tmp + ' | java -jar ' + jarFarasaSegmenter + ' -l true -i ' + tmp + ' -o ' + tmpLemma)
         return self.getArticleContent(tmpLemma)
 
 
@@ -70,7 +80,16 @@ class Helper():
 
 
 if __name__ == '__main__':
-    file = '~/categ/data/preprocessed/PO/global.pkl'
-    help = Helper('article1.txt')
-    print(len(help.getPickleContent(file)))
+    
+    files = [
+        '../data/vocabularies/culture_vocabulary.pkl', 
+        '../data/vocabularies/politic_vocabulary.pkl', 
+        '../data/vocabularies/religion_vocabulary.pkl', 
+        '../data/vocabularies/sport_vocabulary.pkl', 
+        '../data/vocabularies/society_vocabulary.pkl']
+    
+    file = files[2]
+    
+    help = Helper(file)
 
+    print(len(help.getPickleContent(file)))
