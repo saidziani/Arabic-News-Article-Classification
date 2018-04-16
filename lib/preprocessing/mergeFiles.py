@@ -7,32 +7,33 @@ from helper import Helper
 help = Helper()
 
 #Local
-root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
+# root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
 #Server
-# root = "/home/said/categ/"
+root = "/home/said/categ/"
 raw = root+'data/raw'
-temp = root+'data/temp'
+temp = root+'data/temp/'
 prep = root+'data/preprocessed'
 
-raw = 'data/'
-temp = 'temp/'
-tempNL = temp+'NL'
+tempWNL = temp+'WithoutNewLine'
 
-# directories = os.listdir(raw)
-directories = ['SP', 'CL', 'PO', 'SO', 'RL']
+directories =  ['PO', 'CL']
+
 separator, content = '\nفففففففففففففففففففف\n', ''
 
-for directory in directories[2:3]:
+for directory in directories:
     directoryPath = os.path.join(raw, directory)
     files = os.listdir(directoryPath)
     for i in range(1, len(files)+1):
         file = str(i)
         filePath = os.path.join(directoryPath, file)
-        content += help.dropNline(filePath) + separator
-        w = i % 5
-        if w == 0 :
-            newFile = tempNL+'/'+directory+'/'+str(i)
-            newFile = open(newFile, 'w')
-            newFile.write(content)
-            content = ''
-            print('OK-- ', directory, i)
+        if os.path.exists(filePath):
+            w = i % 100
+            content += help.dropNline(filePath) 
+            if w != 0 :
+                content += separator
+            if w == 0 :
+                newFile = tempWNL+'/'+directory+'/'+str(i)
+                newFile = open(newFile, 'w')
+                newFile.write(content)
+                content = ''
+                print('OK-- ', directory, i)
