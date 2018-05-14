@@ -8,26 +8,30 @@ help = Helper()
 
 
 #Local
-# root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
+root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
 #Server
-root = "/home/said/categ/"
+# root = "/home/said/categ/"
 raw = root+'data/raw/'
 temp = root+'data/temp/'
 prep = root+'data/preprocessed/'
 
 temp = temp+'WithoutNewLine/'
 
-directories = ['PO', 'CL', 'RL', 'SO', 'SP']
+directories = ['MO', 'EC']
 
-directory = temp+directories[-1]
+index = 1
 
-target = prep+directories[-1]
+directory = temp+directories[index]
+
+target = prep+directories[index]
 
 files = os.listdir(directory)
 
 for file in files:
     inputPath = directory+'/'+file
+    print(inputPath)
     bgw = help.getBagWordsArticle(inputPath)
     bagofwords = [article.split() for article in ' '.join(bgw).split('فففففففففففففففففففف')]
     outputPath = target+'/'+file
     help.setPickleContent(outputPath, bagofwords)
+    print('---OK')

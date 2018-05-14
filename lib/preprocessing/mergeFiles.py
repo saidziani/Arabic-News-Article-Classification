@@ -7,16 +7,15 @@ from helper import Helper
 help = Helper()
 
 #Local
-# root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
+root = '/media/said/DevStuff/PFE/ArabicTextCategorization/'
 #Server
-root = "/home/said/categ/"
+# root = "/home/said/categ/"
 raw = root+'data/raw'
 temp = root+'data/temp/'
-prep = root+'data/preprocessed'
 
 tempWNL = temp+'WithoutNewLine'
 
-directories =  ['PO', 'CL']
+directories =  ['EC']
 
 separator, content = '\nفففففففففففففففففففف\n', ''
 

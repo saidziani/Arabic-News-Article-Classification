@@ -12,21 +12,15 @@ prep = root+'data/preprocessed/'
 
 directories = ['MO', 'EC']
 
-directory = prep+directories[1]
-
+directory = prep+directories[0]
 
 files = os.listdir(directory)
 
-bgw = []
-
+vocabulary = []
 for file in files:
-    vocabulary = []
     filePath = directory+'/'+file
     articles = help.getPickleContent(filePath)
-    print(len(articles))
-    exit(-1)
-    [vocabulary.extend(list(set(article))) for article in articles]
-    bgw.extend(set(vocabulary))
+    [vocabulary.append(article) for article in articles]
 
-output = directory+'/economic'
-help.setPickleContent(output, list(set(bgw)))
+output = directory+'/world'
+help.setPickleContent(output, vocabulary)
