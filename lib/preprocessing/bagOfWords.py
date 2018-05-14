@@ -15,6 +15,7 @@ temp = root+'data/temp'
 prep = root+'data/preprocessed'
 
 
+
 directories = os.listdir(raw)
 
 for directory in directories[2:3]:

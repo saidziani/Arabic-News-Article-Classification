@@ -16,8 +16,10 @@ tools = root+'Tools/'
 farasa = tools+'farasa'
 farasaSegmenter = farasa + '/segmenter'
 
+
 stopWords = open(os.path.join(tools, "arabic-stop-words/list.txt")).read().splitlines()
 stopWords.append('ﺮﺒﺨﻟا')
+
 class Helper():
     def __init__(self, article = False):
         self.article = article
