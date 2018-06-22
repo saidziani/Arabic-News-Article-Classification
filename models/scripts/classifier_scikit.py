@@ -7,6 +7,7 @@ help = Helper()
 # categories = ['religion', 'world', 'sport', 'society', 'politic', 'culture']
 
 categories_dict = {'religion':6, 'world':5, 'sport':2, 'society':4, 'politic':1, 'culture':3}
+classes = ['world', 'sport', 'algeria', 'society', 'religion', 'culture']
 categories = [str(cat) for cat in categories_dict.values()]
 
 
@@ -60,6 +61,10 @@ trueTarget = help.getPickleContent(testPath+'test_target.pkl')
 X_new_counts = count_vect.transform(new)
 X_new_tfidf = tfidf_transformer.transform(X_new_counts)
 predicted = model.predict(X_new_tfidf)
+from sklearn.calibration import CalibratedClassifierCV 
+clf = CalibratedClassifierCV(model)
+clf.fit(X_train_tfidf, target)
+predicted_proba = clf.predict_proba(X_new_tfidf)
 
 
 import numpy as np
@@ -73,4 +78,50 @@ from sklearn import metrics
 print(metrics.classification_report(trueTarget, predicted,
     target_names=categories))
 
-print(metrics.confusion_matrix(trueTarget, predicted))
+conf_matrix = metrics.confusion_matrix(trueTarget, predicted)
+
+import scikitplot.metrics as skplt
+import matplotlib.pyplot as plt
+import numpy as np
+import itertools
+def plot_confusion_matrix(cm, classes,
+                          normalize=False,
+                          title='Confusion matrix',
+                          cmap=plt.cm.Blues):
+    """
+    This function prints and plots the confusion matrix.
+    Normalization can be applied by setting `normalize=True`.
+    """
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        print("Normalized confusion matrix")
+    else:
+        print('Confusion matrix, without normalization')
+
+    print(cm)
+
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=45)
+    plt.yticks(tick_marks, classes)
+
+    fmt = '.2f' if normalize else 'd'
+    thresh = cm.max() / 2.
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, format(cm[i, j], fmt),
+                 horizontalalignment="center",
+                 color="white" if cm[i, j] > thresh else "black")
+
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+
+
+plt.figure()
+plot_confusion_matrix(conf_matrix, classes, title='Matrice de confusion')
+plt.show()
+
+skplt.plot_roc_curve(trueTarget, predicted_proba)
+plt.show()
