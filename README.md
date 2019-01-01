@@ -70,7 +70,7 @@ Each word was stemmed using [Farasa Arabic text processing toolkit](http://qatsd
 
 Categories = {الجزائر : Algeria, الثقافة : entertainment, الدين : religion, المجتمع : society, الرياضة : sport, العالم : world}
 <div style="text-align: center"> 
-  <img src="http://sumrized.com/feedny/talaa.png" alt="TALAA Categories" />
+  <img src="https://s3.amazonaws.com/saidziani/Arabic+News+Article+Classification/talaa.png" alt="TALAA Categories" />
 </div>
 
 ---
@@ -88,7 +88,7 @@ Many Machine Learning algorithms has been experimented:
 ## Evaluation (Confusion matrix)
 Confusion matrix using the best model SVM with Stochastic Gradient Descent:
 <div style="text-align: center"> 
-  <img src="http://sumrized.com/feedny/confusion.png" alt="Confusion matrix" />
+  <img src="https://s3.amazonaws.com/saidziani/Arabic+News+Article+Classification/confusion.png" alt="Confusion matrix" />
 </div>
 
 ---
